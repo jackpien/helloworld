@@ -19,4 +19,12 @@ export EDITOR=emacs
 # Colorize folders, executables, etc
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-alias ls='ls -GFh'
+export LS_COLORS="di=1;34:ln=1;35:so=1;31:pi=1;33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+# Enable ls color depending on platform
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+    alias ls='ls -GFh --color=auto'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+    alias ls='ls -GFh'
+fi
