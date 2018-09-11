@@ -28,3 +28,20 @@ if [[ "$unamestr" == 'Linux' ]]; then
 elif [[ "$unamestr" == 'Darwin' ]]; then
     alias ls='ls -GFh'
 fi
+
+# Some custom bins in path
+export PATH="$HOME/local/bin:$PATH"
+
+
+# For linux only
+function increase_watch_count() {
+    if [[ "$unamestr" == 'Linux' ]]; then
+	echo "Old max_user_watches"
+	cat /proc/sys/fs/inotify/max_user_watches
+	echo "Increasing max_user_watches..."
+	sudo sysctl fs.inotify.max_user_watches=524288
+	sudo sysctl -p
+	echo "New max_user_watches"
+	cat /proc/sys/fs/inotify/max_user_watches
+    fi
+}
